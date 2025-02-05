@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-
-
-namespace TextRPG
+﻿namespace TextRPG
 {
     class Program
     {
@@ -600,27 +593,27 @@ namespace TextRPG
 
         public Dungeon(Player player)
         {
-                
+
             this.player = player;
         }
 
         Random rand = new Random();
-        
+
 
 
         public void DungeonChallenge(int requiredDefence, int reward, string dungeonName)
         {
             int dice = rand.Next(0, 101);
             int hpLoss = 0;
-            if(player.Defence+player.DefenceBonus < requiredDefence) 
+            if (player.Defence + player.DefenceBonus < requiredDefence)
             {
-                if(dice < 40)
+                if (dice < 40)
                 {
-                    hpLoss = player.MaxHealth/2;
+                    hpLoss = player.MaxHealth / 2;
                     player.CurrentHealth -= hpLoss;
                     Print.P("던전 실패!");
                     Console.ReadKey();
-                    Program.EnterDungeon(); 
+                    Program.EnterDungeon();
                 }
                 else
                 {
@@ -628,10 +621,10 @@ namespace TextRPG
                     GetReward(reward);
                 }
             }
-            else if(player.Defence + player.DefenceBonus >= requiredDefence)
+            else if (player.Defence + player.DefenceBonus >= requiredDefence)
             {
                 Print.P("던전 성공!");
-                hpLoss = (dice*15)/100 + player.Defence + player.DefenceBonus - requiredDefence;
+                hpLoss = (dice * 15) / 100 + player.Defence + player.DefenceBonus - requiredDefence;
                 player.CurrentHealth -= hpLoss;
                 GetReward(reward);
             }
@@ -640,9 +633,9 @@ namespace TextRPG
         private void GetReward(int reward)
         {
             int dice = rand.Next(0, 20);
-            
-            player.Gold += reward + (reward * dice*(player.Attack+player.AttackBonus))/1000;
-            Print.P($"{reward + (reward * dice* (player.Attack + player.AttackBonus))/1000} G를 보상으로 받았습니다.");
+
+            player.Gold += reward + (reward * dice * (player.Attack + player.AttackBonus)) / 1000;
+            Print.P($"{reward + (reward * dice * (player.Attack + player.AttackBonus)) / 1000} G를 보상으로 받았습니다.");
             Console.ReadKey();
             Program.EnterDungeon();
         }
