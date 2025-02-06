@@ -13,6 +13,8 @@
             char[] chars = title.ToCharArray();
             player.SetInventory(inventory);
 
+            Print.P("ddddd")
+
             foreach (char c in chars)
             {
                 Console.Write(c);
